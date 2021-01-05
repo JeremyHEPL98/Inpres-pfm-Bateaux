@@ -48,29 +48,31 @@ public class ThreadClient extends Thread
                 {
                     try
                     {
-
                         StringBuffer message = new StringBuffer();
                         RequeteIOBREP requeteIOBREP = new RequeteIOBREP(0, "");
                         message = Reseau.msgRecv(dis);
                         System.out.println(nom + " : Message reçu = " + message.toString());
 
-                        int type = Integer.valueOf(message.substring(0, 4).replace("0",""));
-                        String chargeUtile = message.substring(4).replace("\r\n", "");
-
-                        System.out.println(" type = " + type);
-                        System.out.println(" ChargeUtile = " + chargeUtile);
-
-
-                        requeteIOBREP.setType(type);
-                        requeteIOBREP.setChargeUtile(chargeUtile);
-                        requeteIOBREP.setSocketClient(socket);
-                        requeteIOBREP.createRunnable(socket, listeSocket, dis, dos);
-
-                        if (type == 5)
+                        if(!message.toString().equals("") || !message.toString().equals("\r\n"))
                         {
-                            connected = false;
-                        }
+                            int type = Integer.parseInt(message.substring(0, 1));
+                            String chargeUtile = message.substring(1).replace("\r\n", "");
 
+                            System.out.println(" type = " + type);
+                            System.out.println(" ChargeUtile = " + chargeUtile);
+
+
+                            requeteIOBREP.setType(type);
+                            requeteIOBREP.setChargeUtile(chargeUtile);
+                            requeteIOBREP.setSocketClient(socket);
+                            requeteIOBREP.createRunnable(socket, listeSocket, dis, dos);
+                            System.out.println("Client IP: " + socket.getInetAddress());
+
+                            if (type == 5)
+                            {
+                                connected = false;
+                            }
+                        }
                     } catch (IOException e)
                     {
                         System.err.println("Erreur: " + e.getMessage());

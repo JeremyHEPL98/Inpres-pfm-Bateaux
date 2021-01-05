@@ -29,12 +29,13 @@ public class Reseau {
 
         try
         {
-            while ( preb != (byte)'\r' & b != (byte)'\n'   )
+            while (!(preb == (byte)'\r' && b == (byte)'\n'))
             {
+                preb = b;
                 b = dis.readByte();
                 message.append((char) b);
+                //System.out.println("b: "+b+ " - Message: "+message);
             }
-
         }
         catch (IOException e)
         {
@@ -42,7 +43,6 @@ public class Reseau {
         }
 
         return message;
-
     }
 
 

@@ -92,6 +92,8 @@ public class RequeteIOBREP implements Requete {
     private void traiterRequete_LOGIN(Socket socket, DataOutputStream dos, DataInputStream dis){
         System.out.println("LOGIN");
 
+        // vérification dans BD_Compta
+        Reseau.Reseau.msgSend("1Login successful", dos);
     }
 
     private void traiterRequete_GET_CONTAINERS(Socket socket, DataOutputStream dos, DataInputStream dis){
@@ -116,7 +118,4 @@ public class RequeteIOBREP implements Requete {
     private void traiterRequete_END_CONTAINER_IN(Socket socket, DataOutputStream dos, DataInputStream dis){
         System.out.println("END_CONTAINER_IN");
     }
-
-
-
 }

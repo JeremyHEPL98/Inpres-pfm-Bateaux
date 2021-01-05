@@ -32,7 +32,7 @@ public class ThreadServeur  extends Thread
 
         for (int i=0; i< NB_MAX_CLIENTS; i++)
         {
-            ThreadClient thr = new ThreadClient (listeSocket, "ThreadSALARY du pool n°" + String.valueOf(i));
+            ThreadClient thr = new ThreadClient (listeSocket, "ThreadBATEAU du pool n°" + String.valueOf(i));
             thr.start();
         }
 
