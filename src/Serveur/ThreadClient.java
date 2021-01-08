@@ -7,6 +7,8 @@ import java.security.*;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import Protocol.RequeteIOBREP;
 import Reseau.Reseau;
 
@@ -18,6 +20,7 @@ public class ThreadClient extends Thread
     private String nom;
     private ListeSocket listeSocket;
     private Socket socket;
+    private ArrayList<String> listConWait= new ArrayList<String>();
 
 
     public ThreadClient(ListeSocket list, String n)
@@ -62,10 +65,11 @@ public class ThreadClient extends Thread
                             System.out.println(" ChargeUtile = " + chargeUtile);
 
 
+
                             requeteIOBREP.setType(type);
                             requeteIOBREP.setChargeUtile(chargeUtile);
                             requeteIOBREP.setSocketClient(socket);
-                            requeteIOBREP.createRunnable(socket, listeSocket, dis, dos);
+                            requeteIOBREP.createRunnable(socket, listeSocket, dis, dos, listConWait);
                             System.out.println("Client IP: " + socket.getInetAddress());
 
                             if (type == 5)
